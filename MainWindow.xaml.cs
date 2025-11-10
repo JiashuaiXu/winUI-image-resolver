@@ -59,6 +59,8 @@ namespace ImageResolver
 
                 _imageInfos.Clear();
                 DetailsPanel.Children.Clear();
+                _previousSelectedBorder = null;
+                _selectedImage = null;
 
                 var imageInfos = await _imageInfoService.ProcessImagesAsync(folderPath);
 
@@ -86,13 +88,55 @@ namespace ImageResolver
             }
         }
 
+        private Border? _previousSelectedBorder;
+
         private void ImageItem_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
             if (sender is Border border && border.DataContext is ImageInfoViewModel viewModel)
             {
+                // 恢复之前选中项的样式
+                if (_previousSelectedBorder != null && _previousSelectedBorder != border)
+                {
+                    ResetBorderStyle(_previousSelectedBorder);
+                }
+                
+                // 清除之前选中项的状态
+                if (_selectedImage != null && _selectedImage != viewModel)
+                {
+                    _selectedImage.IsSelected = false;
+                }
+                
+                // 设置新的选中项
                 _selectedImage = viewModel;
+                viewModel.IsSelected = true;
+                _previousSelectedBorder = border;
+                
+                // 更新当前项的样式为选中状态
+                ApplySelectedStyle(border);
+                
                 UpdateDetailsPanel(viewModel);
             }
+        }
+
+        private void ApplySelectedStyle(Border border)
+        {
+            // 使用系统高亮色，自动适配深色/浅色主题
+            var accentBrush = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["SystemControlHighlightAccentBrush"];
+            var accentLowBrush = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["SystemControlHighlightListAccentLowBrush"];
+            
+            border.Background = accentLowBrush ?? new Microsoft.UI.Xaml.Media.SolidColorBrush(
+                Microsoft.UI.ColorHelper.FromArgb(255, 0, 120, 215));
+            border.BorderBrush = accentBrush ?? new Microsoft.UI.Xaml.Media.SolidColorBrush(
+                Microsoft.UI.ColorHelper.FromArgb(255, 0, 99, 177));
+            border.BorderThickness = new Thickness(2);
+        }
+
+        private void ResetBorderStyle(Border border)
+        {
+            // 恢复默认样式
+            border.Background = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["CardBackgroundFillColorDefaultBrush"];
+            border.BorderBrush = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["CardStrokeColorDefaultBrush"];
+            border.BorderThickness = new Thickness(1);
         }
 
         private void UpdateDetailsPanel(ImageInfoViewModel viewModel)
@@ -281,6 +325,7 @@ namespace ImageResolver
     public class ImageInfoViewModel : System.ComponentModel.INotifyPropertyChanged
     {
         private BitmapImage? _thumbnail;
+        private bool _isSelected;
 
         public ImageInfo ImageInfo { get; }
         public string FileName => ImageInfo.FileName;
@@ -294,6 +339,19 @@ namespace ImageResolver
             {
                 _thumbnail = value;
                 OnPropertyChanged(nameof(Thumbnail));
+            }
+        }
+
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set
+            {
+                if (_isSelected != value)
+                {
+                    _isSelected = value;
+                    OnPropertyChanged(nameof(IsSelected));
+                }
             }
         }
 

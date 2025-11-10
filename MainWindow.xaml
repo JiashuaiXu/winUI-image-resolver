@@ -68,7 +68,8 @@
                     <ItemsControl x:Name="ImageListControl">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                <Border x:Name="ItemBorder"
+                                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                         BorderThickness="1"
                                         CornerRadius="8"
