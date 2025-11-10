@@ -109,3 +109,6 @@ artifacts/
 
 # Cursor IDE
 .specstory/
+
+# Publish output
+publish/
