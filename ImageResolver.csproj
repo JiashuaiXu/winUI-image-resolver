@@ -9,6 +9,7 @@
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
     <WindowsPackageType>None</WindowsPackageType>
+    <!-- 发布时可以通过 -p:WindowsPackageType=Msix 来启用 MSIX 打包 -->
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
