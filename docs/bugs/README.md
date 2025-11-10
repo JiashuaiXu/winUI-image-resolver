@@ -10,6 +10,8 @@
 - [BUG-004: Windows SDK .NET Ref Required](./004-windows-sdk-net-ref-required.md) - 需要 WindowsSdkPackageVersion（已修复）
 - [BUG-005: File Lock Error](./005-file-lock-error.md) - 文件锁定错误（临时问题）
 - [BUG-006: XAML Compilation Error with .NET 9](./006-xaml-compilation-error-net9.md) - .NET 9 和 WindowsAppSDK 1.8 的 XAML 编译错误
+- [BUG-007: XAML Compilation Fixes](./007-xaml-compilation-fixes.md) - XAML 编译修复方案
+- [BUG-008: dotnet Command Wrong Directory](./008-dotnet-command-wrong-directory.md) - 在错误目录下执行 dotnet 命令失败（已解决）
 - [兼容性说明](./COMPATIBILITY.md) - 关于 WindowsAppRuntime 版本兼容性的说明
 
 ## 命名规范
