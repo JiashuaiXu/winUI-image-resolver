@@ -93,9 +93,23 @@ ImageResolver/
 └── MainWindow.xaml.cs  # 主窗口逻辑
 ```
 
-## 设计文档
+## 文档
 
-详细的设计文档和规范请参考 [DESIGN.md](DESIGN.md)
+- [设计文档](DESIGN.md) - 详细的设计文档和规范
+- [快速开始](QUICKSTART.md) - 快速上手指南
+- [发布文档](PUBLISH.md) - 打包发布说明
+- [学习指南](docs/learning/README.md) - 新手学习教程（推荐！）
+
+### 📚 学习指南
+
+专为新手设计的学习文档，从零开始学习整个项目：
+
+- 🚀 [入门篇](docs/learning/README.md#-入门篇) - 项目简介、环境搭建、快速开始
+- 🏗️ [架构篇](docs/learning/README.md#-架构篇) - 项目架构、结构、设计模式
+- 💻 [技术栈篇](docs/learning/README.md#-技术栈篇) - WinUI 3、XAML、C# 异步、数据绑定
+- 🔧 [实现篇](docs/learning/README.md#-实现篇) - UI 实现、图片处理、EXIF 读取、CSV 导出
+
+**开始学习**: [docs/learning/README.md](docs/learning/README.md)
 
 ## 许可证
 
